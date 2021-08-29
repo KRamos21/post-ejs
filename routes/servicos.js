@@ -1,6 +1,10 @@
 const express = require("express");
-const router = express.Router();
 const servicosController = require("../controller/servicosController");
+const multer = require("multer");
+const fs = require("fs")
+
+const router = express.Router();
+const upload = multer({ dest: "C:/Users/kauer/AppData/Local/Temp" })
 
 const rnds = [];
 
@@ -53,8 +57,13 @@ const myMulter = (req, res, next) => {
   });
 }
 
-router.post('/importar', myMulter, (req, res) => {
-  res.send(req.fileContents);
+router.post('/importar', upload.single("cnh"), (req, res) => {
+  // Lendo o arquivo tratado pelo multer
+  const itensServicosTxt = fs.readFileSync(req.file.path, "utf-8");
+  const itensServicos = JSON.parse(itensServicosTxt)
+  servicosController.importarItensServico(itensServicos)
+  
+  res.redirect("/servicos")
 });
 
 module.exports = router;

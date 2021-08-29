@@ -3,7 +3,7 @@
   <head>
     <title></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <script>
+    <!-- <script>
       const listaServico = [
       <% listaServico.forEach(item => { %>
         {
@@ -31,7 +31,7 @@
 
         return true;
       }
-    </script>
+    </script> -->
   </head>
   <body>
     <h1></h1>
@@ -53,13 +53,11 @@
 
     <hr />
 
-    <form
-      method="POST"
-      action="/servicos/importar"
-      enctype="multipart/form-data"
-    >
-      Arquivo: <input type="file" name="file" />
+    <form method="POST" action="/servicos/importar" enctype="multipart/form-data">
+      Arquivo: <input type="file" name="cnh" />
+      <input type="hidden" name="rnd" value="<%= rnd %>" />
       <input type="submit" />
     </form>
+  
   </body>
 </html>
